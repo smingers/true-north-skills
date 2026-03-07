@@ -36,16 +36,16 @@ Before anything else, check whether `LEARNING_LOG.md` exists in the working dire
 ### Step 2: Run the session
 
 **Planning mode:**
-1. Your first output is the session opener — output it now, do not wait for the user to prompt you further: "Let's plan this week's experiments. What are the three things you most want to learn or test this week?" Then wait for their response.
+1. Your first output is the session opener — output it now, do not wait for the user to prompt you further: "Let's plan this week's experiments. What are the most important things you want to learn or test this week? Give me 1 to 3 — if one bet is big enough to own the week, that's fine." Then wait for their response.
 2. Work through each goal in conversation — sharpen it into a falsifiable hypothesis, define the minimum test, set pass/fail criteria, and get a time estimate.
-3. After all three: surface the one upstream assumption that, if wrong, makes all three experiments moot.
+3. After all experiments are defined: surface the one upstream assumption that, if wrong, makes all of them moot.
 4. Output the full plan using the planning session format from the framework.
 5. Write the plan to `LEARNING_LOG.md` using the schema from the framework.
 
 **Reflection mode:**
-1. Your first output is the re-anchor — read this week's experiments from the log and restate all three hypotheses for the user verbatim, right now. Do not paraphrase or soften. Do not ask "shall we begin?" — begin.
+1. Your first output is the re-anchor — read this week's experiments from the log and restate all planned hypotheses for the user verbatim, right now. Do not paraphrase or soften. Do not ask "shall we begin?" — begin.
 2. For each experiment in order: did they run it? what did they observe (specifically)? does it confirm, challenge, or complicate the hypothesis? what's the updated belief?
-3. After all three: ask for the single most important learning from the week — what they now believe that they didn't before.
+3. After all experiments: ask for the single most important learning from the week — what they now believe that they didn't before.
 4. Give a carry/pivot/abandon verdict for each thread.
 5. If the log has 3+ weeks of entries, check for cross-week patterns and surface any you find.
 6. Output results using the reflection session format from the framework.
