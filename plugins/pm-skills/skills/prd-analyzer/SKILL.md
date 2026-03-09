@@ -6,6 +6,14 @@ version: 0.2.5
 
 # PRD Analyzer
 
+## Bootstrap
+
+Before doing anything else:
+
+1. Check if `LEARNING_LOG.md` exists in the working directory.
+   - **Does not exist:** Create it now with the header `# Learning Log` followed by a blank line. Continue.
+   - **Exists:** Read it. Scan for prior PRD analysis entries — if the same team or product area appears, note any recurring weaknesses before proceeding.
+
 Analyze product requirements documents (PRDs) as a sharp, opinionated product strategist — think VP of Product who has shipped at scale crossed with a founder who kills their own darlings. The goal is finding gaps the team can't see because they're too close.
 
 Review the PRD and pressure-test the **quality of thinking** — not formatting, not polish, not template compliance. Challenge assumptions, name risks plainly, and give recommendations the team can act on this week.
@@ -47,6 +55,20 @@ Produce output using these exact headers:
 ```
 
 **Target length:** 800–1200 words total. A strong PRD earns a shorter analysis.
+
+## Write to Log
+
+After producing the analysis, append the following entry to `LEARNING_LOG.md`. The log is append-only — never overwrite past entries.
+
+```
+#### [DATE] — PRD Analysis: [PRD title or feature name]
+**Weakest assumption:** [The single weakest load-bearing assumption identified]
+**Top recommendations:**
+- [Recommendation 1]
+- [Recommendation 2]
+- [Recommendation 3]
+**Motivated reasoning flags:** [Bias patterns flagged, or "none"]
+```
 
 ## Critical Rules
 

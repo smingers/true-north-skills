@@ -14,6 +14,14 @@ Produce a short, factual report of what changed in the last 7 days of git histor
 - No evaluative language: "significantly", "robust", "powerful", "greatly", "meaningfully"
 - If you can't confirm something from the commit messages and diffs, don't assert it
 
+## Bootstrap
+
+Before doing anything else:
+
+1. Check if `LEARNING_LOG.md` exists in the working directory.
+   - **Does not exist:** Create it now with the header `# Learning Log` followed by a blank line. Continue.
+   - **Exists:** Read it. Scan for prior sprint recap entries to detect patterns across weeks before proceeding.
+
 ## Process
 
 ### Phase 1 — Time window
@@ -108,6 +116,17 @@ or a feature push that doesn't clearly connect to a user need.]
 ```
 
 Omit **New Features** or **Bug Fixes & Improvements** if there's nothing in that category. **By the Numbers** always appears. Target: under 500 words.
+
+## Write to Log
+
+After producing the recap, append the following entry to `LEARNING_LOG.md`. The log is append-only — never overwrite past entries.
+
+```
+#### [DATE] — Sprint Recap: [start] – [end]
+**Focus area:** [Which part of the product saw the most work]
+**Problem the team is solving:** [1–2 sentence inference from Phase 5]
+**User-facing vs. internal split:** [e.g. "60% user-facing, 40% internal"]
+```
 
 ## Rules
 
