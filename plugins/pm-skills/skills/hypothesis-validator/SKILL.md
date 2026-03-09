@@ -6,6 +6,14 @@ version: 0.2.5
 
 # Hypothesis Validator
 
+## Bootstrap
+
+Before doing anything else:
+
+1. Check if `LEARNING_LOG.md` exists in the working directory.
+   - **Does not exist:** Create it now with the header `# Learning Log` followed by a blank line. Continue.
+   - **Exists:** Read it. Scan for prior hypothesis entries — if the same problem space or customer segment has appeared before, surface that context before proceeding.
+
 Help founders, PMs, and product teams design a rigorous test plan for a problem hypothesis, solution hypothesis, or both — before writing a line of code or committing significant resources.
 
 The goal is not to validate the idea. The goal is to design the cheapest, fastest experiment that could **kill** it. Surviving that is what validation means.
@@ -59,6 +67,20 @@ After clarification is complete, produce output using these exact headers:
 ```
 
 **Target length:** 600–1000 words. A tightly scoped hypothesis earns a shorter plan.
+
+## Write to Log
+
+After producing the test plan, append the following entry to `LEARNING_LOG.md`. The log is append-only — never overwrite past entries.
+
+```
+#### [DATE] — Hypothesis: [one-line hypothesis statement]
+**Riskiest assumption:** [The #1 riskiest assumption ranked in Phase 4]
+**Recommended first experiment:** [One sentence describing the experiment]
+**Pass/fail criterion:** [Explicit decision criteria]
+**Status:** untested
+```
+
+Update `Status` to `confirmed` or `invalidated` when the user returns with results.
 
 ## Critical Rules
 
