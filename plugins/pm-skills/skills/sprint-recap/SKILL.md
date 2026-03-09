@@ -61,7 +61,18 @@ Look at which directories changed most and map them to product areas:
 - `lib/`, `utils/`, `helpers/` → shared logic (user impact depends on callers)
 - `.github/`, `scripts/`, `config/`, `test/` → no user impact
 
-### Phase 5 — Select what to report
+### Phase 5 — Infer the problem being solved
+
+Step back from individual commits and look at the week as a whole. What underlying problem does this body of work suggest the team is trying to solve? This is an inference — make it, but own it as one.
+
+Ask:
+- What's the recurring theme across the most significant commits? (e.g. "the research pipeline can't access enough data", "parsing failures are causing silent errors", "the UI is hard to navigate")
+- Is this problem primarily about **end-user value** (users get better outcomes, new capabilities, fewer frustrations) or primarily about **internal concerns** (code quality, developer experience, technical debt, reliability that users don't directly feel)?
+- Is there a mismatch between the volume of work done and the user impact delivered? (e.g. a week of heavy refactoring with no user-facing output)
+
+Be direct. If the work looks internally focused, say so. If the alignment to user value is strong, say so. If it's mixed, say that. Don't hedge into meaninglessness.
+
+### Phase 6 — Select what to report
 
 From New Feature and Bug Fix / Improvement commits only, pick the **3–5 most functionally significant**. Drop the rest. Skip this entirely if there are no user-facing commits — just say so in the summary.
 
@@ -76,6 +87,13 @@ Write 1–2 sentences per item: what changed, factually. No file paths. No assum
 [2–3 sentences. What area of the product saw the most work this week?
 Factual, no praise. If it was a maintenance-only week, say that.]
 
+## What Problem Is The Team Solving?
+[3–5 sentences. Infer the underlying problem from the pattern of commits — not what
+they did, but what problem drove the work. Then assess: is this work aligned to
+delivering end-user value, or is it primarily internal? Be direct. Flag a mismatch
+if there is one — e.g. a week of heavy internal work with minimal user-facing output,
+or a feature push that doesn't clearly connect to a user need.]
+
 ## New Features
 - **[Name]**: [what it does, factually, 1–2 sentences]
 
@@ -89,7 +107,7 @@ Factual, no praise. If it was a maintenance-only week, say that.]
 - **User-facing vs. internal**: [split if estimable]
 ```
 
-Omit **New Features** or **Bug Fixes & Improvements** if there's nothing in that category. **By the Numbers** always appears. Total report: under 350 words.
+Omit **New Features** or **Bug Fixes & Improvements** if there's nothing in that category. **By the Numbers** always appears. Target: under 500 words.
 
 ## Rules
 
