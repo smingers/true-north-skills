@@ -1,5 +1,6 @@
 # Claude IDE worktrees and local settings
 .claude/
+CLAUDE.md
 
 # Dependencies
 node_modules/
