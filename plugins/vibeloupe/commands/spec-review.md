@@ -36,4 +36,4 @@ Then analyze the plan using all 8 lenses in order:
 - Target 800–1200 words total. A strong plan earns a shorter analysis
 - Use the exact section headers and output format specified in the analytical framework reference
 
-**After the analysis:** Ask the user: "Want to load the riskiest hypothesis into your Learning Log as this week's experiment? Or run /hypothesis-validator on it first to build a full test plan?"
+**After the analysis:** Ask the user: "Want to save the riskiest hypothesis to `.vibeloupe/experiments.json` as this week's experiment? Or run /hypothesis-validator on it first to build a full test plan?" If they say yes, append a record using the schema in `../skills/hypothesis-validator/SKILL.md` (Write to Data section), with `created_by` set to `"spec-review"`.

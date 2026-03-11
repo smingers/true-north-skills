@@ -15,19 +15,17 @@ A time range may be provided as arguments. If none is given, default to the last
 
 ## Instructions
 
-Read `../skills/sprint-recap/SKILL.md` for the full process and output format.
+Read `../skills/sprint-recap/SKILL.md` and execute it exactly as written — do not skip any phase.
 
-Then run the sprint recap:
+Critical phases that must not be skipped:
 
-1. Determine the time window (from arguments or default to 7 days)
-2. Run the git commands to gather commit data, file stats, and contributors
-3. Classify each commit and map file paths to user-facing areas
-4. Synthesize a user-centric narrative — surface intent and impact, not just files
-5. Produce the report using the exact format in the skill
+**Bootstrap (before anything else):**
+- Check for `.vibeloupe/sprints.json` — create with `[]` if missing, read for prior patterns if it exists
+- Check for `.vibeloupe/experiments.json` — read it and extract all experiments with `status` of `"untested"` or `"running"` for use in Phase 5.5
 
-**Critical rules:**
-- Default to 7 days; honor any time range the user specifies
-- Never list file paths in the narrative sections
-- If there are zero commits in the window, say so and offer to extend the range
-- Keep the full report under 600 words
-- The "By the Numbers" section is always required
+**Phase 5.5 — Cross-reference open experiments:**
+- After inferring the problem being solved, compare the sprint's work against every open experiment
+- Surface which experiments this sprint advances, and which are drifting
+
+**Write to Data (after producing the report):**
+- Append a record to `.vibeloupe/sprints.json` including `linked_experiment_ids` for any experiments rated Advances
