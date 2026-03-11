@@ -10,17 +10,18 @@ The skills form a loop: **/hypothesis-validator** helps you design the right tes
 
 ## Installation
 
-**Requires:** [Claude Code](https://claude.ai/code) (CLI)
-
+**Claude Code:**
 ```bash
-# Add this marketplace
 claude plugin marketplace add smingers/vibeloupe
-
-# Install the plugin
 claude plugin install vibeloupe
 ```
 
-Once installed, the four slash commands are available in any Claude Code session.
+**Cursor:**
+```
+/add-plugin vibeloupe
+```
+
+Once installed, the four slash commands are available in your session.
 
 ---
 

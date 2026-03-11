@@ -1,0 +1,13 @@
+{
+  "name": "vibeloupe",
+  "displayName": "Vibeloupe",
+  "description": "AI-native workflow to help fast-moving teams figure out what to ship next, measure success, and learn from every experiment.",
+  "version": "0.2.8",
+  "author": {
+    "name": "Jordan Berman"
+  },
+  "homepage": "https://github.com/smingers/vibeloupe",
+  "repository": "https://github.com/smingers/vibeloupe",
+  "keywords": ["product", "experiments", "bml", "hypothesis", "learning", "sprint"],
+  "skillsDir": "./skills/"
+}
