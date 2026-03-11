@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "vibeloupe",
-  "description": "AI-native workflow designed to help fast moving teams figure out what to ship next, right in your IDE.",
+  "description": "AI-native workflow designed to help fast-moving teams figure out what to ship next, right in your IDE.",
   "owner": {
     "name": "Jordan Berman"
   },
