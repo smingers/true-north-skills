@@ -14,10 +14,10 @@ The skills form a loop: **/hypothesis-validator** helps you design the right tes
 
 ```bash
 # Add this marketplace
-claude plugin marketplace add smingers/true-north-skills
+claude plugin marketplace add smingers/vibeloupe
 
 # Install the plugin
-claude plugin install pm-skills@true-north-skills
+claude plugin install pm-skills@vibeloupe
 ```
 
 Once installed, the three slash commands are available in any Claude Code session.
@@ -49,4 +49,4 @@ Runs a weekly Build-Measure-Learn session. In planning mode, sharpens your learn
 
 ---
 
-Much more to come verys soon!
+Much more to come very soon!
