@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vibeloupe</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      color: #222;
+      background: #fafafa;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 600; }
+    h2 { font-size: 1.1rem; margin: 2rem 0 1rem; font-weight: 600; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; }
+    .section { margin-bottom: 2rem; }
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+    .card-id { font-size: 0.75rem; color: #888; font-family: monospace; }
+    .card-title { font-weight: 600; }
+    .status {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      background: #eee;
+    }
+    .status-running { background: #fff3cd; color: #856404; }
+    .status-confirmed { background: #d4edda; color: #155724; }
+    .status-invalidated { background: #f8d7da; color: #721c24; }
+    .status-untested { background: #e2e3e5; color: #383d41; }
+    .field { margin-bottom: 0.5rem; }
+    .field-label { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 0.03em; }
+    .field-value { font-size: 0.9rem; }
+    .empty { color: #999; font-style: italic; }
+    .drop-zone {
+      border: 2px dashed #ccc;
+      border-radius: 4px;
+      padding: 2rem;
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    .drop-zone.drag-over { border-color: #666; background: #f0f0f0; }
+    .hidden { display: none; }
+    .meta { font-size: 0.8rem; color: #666; margin-top: 0.25rem; }
+    .recommendations { list-style: disc; margin-left: 1.25rem; }
+    .recommendations li { margin-bottom: 0.25rem; }
+    .flags { font-size: 0.85rem; color: #b45309; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <h1>vibeloupe</h1>
+
+  <div id="drop-zone" class="drop-zone">
+    <p>Drop JSON files here, or <strong>run a local server</strong> to auto-load.</p>
+    <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #999;">
+      e.g. <code>python -m http.server 8000</code> then open <code>localhost:8000</code>
+    </p>
+  </div>
+
+  <div id="content" class="hidden">
+    <section id="experiments-section" class="section hidden">
+      <h2>Experiments</h2>
+      <div id="experiments"></div>
+    </section>
+
+    <section id="reflections-section" class="section hidden">
+      <h2>Reflections</h2>
+      <div id="reflections"></div>
+    </section>
+
+    <section id="sprints-section" class="section hidden">
+      <h2>Sprints</h2>
+      <div id="sprints"></div>
+    </section>
+
+    <section id="prd-reviews-section" class="section hidden">
+      <h2>PRD Reviews</h2>
+      <div id="prd-reviews"></div>
+    </section>
+  </div>
+
+  <script>
+    const data = {
+      experiments: [],
+      reflections: [],
+      sprints: [],
+      prdReviews: []
+    };
+
+    // Try auto-loading JSON files (works with local server)
+    async function tryAutoLoad() {
+      const files = [
+        { name: 'experiments.json', key: 'experiments' },
+        { name: 'reflections.json', key: 'reflections' },
+        { name: 'sprints.json', key: 'sprints' },
+        { name: 'prd-reviews.json', key: 'prdReviews' }
+      ];
+
+      let loaded = 0;
+      for (const file of files) {
+        try {
+          const res = await fetch(file.name);
+          if (res.ok) {
+            data[file.key] = await res.json();
+            loaded++;
+          }
+        } catch (e) {
+          // Expected to fail on file:// protocol
+        }
+      }
+
+      if (loaded > 0) {
+        document.getElementById('drop-zone').classList.add('hidden');
+        render();
+      }
+    }
+
+    // Handle drag and drop
+    const dropZone = document.getElementById('drop-zone');
+    
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+
+    dropZone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+
+      for (const file of e.dataTransfer.files) {
+        if (!file.name.endsWith('.json')) continue;
+        
+        const text = await file.text();
+        const json = JSON.parse(text);
+        
+        if (file.name === 'experiments.json') data.experiments = json;
+        else if (file.name === 'reflections.json') data.reflections = json;
+        else if (file.name === 'sprints.json') data.sprints = json;
+        else if (file.name === 'prd-reviews.json') data.prdReviews = json;
+      }
+
+      dropZone.classList.add('hidden');
+      render();
+    });
+
+    function render() {
+      document.getElementById('content').classList.remove('hidden');
+      renderExperiments();
+      renderReflections();
+      renderSprints();
+      renderPrdReviews();
+    }
+
+    function renderExperiments() {
+      const container = document.getElementById('experiments');
+      const section = document.getElementById('experiments-section');
+      if (!data.experiments.length) return;
+      
+      section.classList.remove('hidden');
+      container.innerHTML = data.experiments.map(exp => `
+        <div class="card">
+          <div class="card-header">
+            <span class="card-id">${exp.id}</span>
+            <span class="status status-${exp.status}">${exp.status}</span>
+          </div>
+          <div class="field">
+            <div class="field-label">Hypothesis</div>
+            <div class="field-value">${exp.hypothesis || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Riskiest Assumption</div>
+            <div class="field-value">${exp.riskiest_assumption || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Experiment</div>
+            <div class="field-value">${exp.recommended_experiment || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Pass/Fail Criterion</div>
+            <div class="field-value">${exp.pass_fail_criterion || '<span class="empty">—</span>'}</div>
+          </div>
+          ${exp.result ? `
+          <div class="field">
+            <div class="field-label">Result</div>
+            <div class="field-value">${exp.result}</div>
+          </div>
+          ` : ''}
+          ${exp.learnings ? `
+          <div class="field">
+            <div class="field-label">Learnings</div>
+            <div class="field-value">${exp.learnings}</div>
+          </div>
+          ` : ''}
+          ${exp.next_action ? `
+          <div class="field">
+            <div class="field-label">Next Action</div>
+            <div class="field-value">${exp.next_action}${exp.next_action_notes ? ': ' + exp.next_action_notes : ''}</div>
+          </div>
+          ` : ''}
+          <div class="meta">Created ${formatDate(exp.created_at)}${exp.week_of ? ' · Week of ' + exp.week_of : ''}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderReflections() {
+      const container = document.getElementById('reflections');
+      const section = document.getElementById('reflections-section');
+      if (!data.reflections.length) return;
+
+      section.classList.remove('hidden');
+      container.innerHTML = data.reflections.map(ref => `
+        <div class="card">
+          <div class="card-header">
+            <span class="card-id">${ref.id}</span>
+          </div>
+          <div class="field">
+            <div class="field-label">Key Learning</div>
+            <div class="field-value">${ref.key_learning || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Next Steps</div>
+            <div class="field-value">${ref.next_steps_summary || '<span class="empty">—</span>'}</div>
+          </div>
+          ${ref.pattern_note ? `
+          <div class="field">
+            <div class="field-label">Pattern Note</div>
+            <div class="field-value">${ref.pattern_note}</div>
+          </div>
+          ` : ''}
+          <div class="meta">Week of ${ref.week_of} · ${ref.experiment_ids?.length || 0} experiments</div>
+        </div>
+      `).join('');
+    }
+
+    function renderSprints() {
+      const container = document.getElementById('sprints');
+      const section = document.getElementById('sprints-section');
+      if (!data.sprints.length) return;
+
+      section.classList.remove('hidden');
+      container.innerHTML = data.sprints.map(sprint => `
+        <div class="card">
+          <div class="card-header">
+            <span class="card-id">${sprint.id}</span>
+          </div>
+          <div class="field">
+            <div class="field-label">Focus Area</div>
+            <div class="field-value">${sprint.focus_area || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Problem (inferred)</div>
+            <div class="field-value">${sprint.problem_inferred || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="meta">
+            ${sprint.week_start} → ${sprint.week_end} · 
+            ${sprint.commit_count} commits · 
+            ${sprint.contributors?.join(', ') || 'unknown'}
+            ${sprint.user_facing_pct !== null ? ' · ' + sprint.user_facing_pct + '% user-facing' : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderPrdReviews() {
+      const container = document.getElementById('prd-reviews');
+      const section = document.getElementById('prd-reviews-section');
+      if (!data.prdReviews.length) return;
+
+      section.classList.remove('hidden');
+      container.innerHTML = data.prdReviews.map(prd => `
+        <div class="card">
+          <div class="card-header">
+            <span class="card-id">${prd.id}</span>
+          </div>
+          <div class="field">
+            <div class="field-label">PRD</div>
+            <div class="field-value card-title">${prd.prd_title || '<span class="empty">—</span>'}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Weakest Assumption</div>
+            <div class="field-value">${prd.weakest_assumption || '<span class="empty">—</span>'}</div>
+          </div>
+          ${prd.recommendations?.length ? `
+          <div class="field">
+            <div class="field-label">Recommendations</div>
+            <ul class="recommendations">
+              ${prd.recommendations.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+          ` : ''}
+          ${prd.motivated_reasoning_flags?.length ? `
+          <div class="flags">⚠ ${prd.motivated_reasoning_flags.join(' · ')}</div>
+          ` : ''}
+          <div class="meta">Reviewed ${formatDate(prd.created_at)}</div>
+        </div>
+      `).join('');
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    // Try auto-load on page load
+    tryAutoLoad();
+  </script>
+</body>
+</html>
