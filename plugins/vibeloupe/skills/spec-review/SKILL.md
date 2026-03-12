@@ -1,7 +1,7 @@
 ---
 name: spec-review
 description: This skill should be used when the user asks to "analyze this PRD", "review my PRD", "pressure-test this PRD", "critique this product spec", "give me feedback on this PRD", "analyze this product requirements document", or pastes a PRD or product spec and asks for analysis, feedback, or review. Provides sharp, opinionated strategic analysis of PRDs using an 8-section analytical framework.
-version: 0.2.15
+version: 0.2.16
 ---
 
 # PRD Analyzer
@@ -45,17 +45,23 @@ Target: 800–1200 words. A strong PRD earns a shorter analysis.
   "id": "prd_[ISO timestamp without separators, e.g. 20260311T143022]",
   "created_at": "[ISO 8601 datetime]",
   "prd_title": "[PRD title or feature name]",
+  "argument_chain": "[full argument chain analysis — each link rated, weakest link identified]",
+  "real_job": "[jobs to be done reframe — is the PRD solving the real job?]",
+  "load_bearing_assumptions": "[full hidden assumptions audit — all 2-3 assumptions with cheapest tests]",
   "weakest_assumption": "[the single weakest load-bearing assumption identified]",
+  "motivated_reasoning_flags": ["[bias pattern]", "..."],
+  "conviction_vs_evidence": "[mismatches where confidence exceeds supporting evidence]",
+  "moonshot_alternatives": "[1-2 fundamentally different approaches to the same problem]",
+  "pre_mortem": "[predicted outcome, success mechanisms, failure narratives, 30-day watchpoints]",
   "recommendations": [
     "[Recommendation 1]",
     "[Recommendation 2]",
     "[Recommendation 3]"
-  ],
-  "motivated_reasoning_flags": ["[bias pattern]", "..."]
+  ]
 }
 ```
 
-Use `[]` for `motivated_reasoning_flags` if none were identified.
+Use `[]` for `motivated_reasoning_flags` if none were identified. Use `null` for any section that had no issues.
 
 ## Critical Rules
 

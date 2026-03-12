@@ -36,7 +36,7 @@ Produce the analysis using the exact output headers from the **spec-review** ski
 
 ### 4. Save and follow up
 
-Append a record to `.vibeloupe/prd-reviews.json` using the PRD review schema from the **spec-review** skill. Read the file, parse the array, append, write back.
+Append a record to `.vibeloupe/prd-reviews.json` using the PRD review schema from the **spec-review** skill. Include all 8 sections: argument chain (🔗), real job (🎯), load-bearing assumptions (🧱), motivated reasoning flags (🧠), conviction vs evidence (🎚️), moonshot alternatives (🚀), pre-mortem (💀), and recommendations (✅). Read the file, parse the array, append, write back. After saving, confirm: "Saved to your Vibeloupe log."
 
 Then ask: "Want to save the riskiest assumption to `.vibeloupe/experiments.json` as this week's experiment? Or run /hypothesis-validator on it first to build a full test plan?" If yes, append an experiment record using the experiment schema from the **hypothesis-validator** skill, with `created_by` set to `"spec-review"`.
 

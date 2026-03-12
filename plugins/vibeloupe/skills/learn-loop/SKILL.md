@@ -1,7 +1,7 @@
 ---
 name: learn-loop
 description: Use when the user wants to plan their learning experiments for the week, capture results from experiments they ran, record what they learned, or review their Build-Measure-Learn log. Triggers on: "what should I learn this week", "let's do my weekly planning", "capture my learnings", "record my experiment results", "Friday reflection", "BML loop", "what did I learn this week", "review my learning log", "weekly review", or when the user wants to run a structured planning or reflection session.
-version: 0.2.15
+version: 0.2.16
 ---
 
 # Learn Loop
@@ -80,6 +80,7 @@ Target: 400–700 words. Reflection sessions should be shorter than planning ses
   "riskiest_assumption": "[the assumption most likely to make this experiment moot]",
   "recommended_experiment": "[minimum test that could disprove the hypothesis; include time estimate as prose]",
   "pass_fail_criterion": "[explicit pass and fail criteria]",
+  "upstream_assumption": "[the one belief that, if wrong, makes all of this week's experiments moot]",
   "status": "untested",
   "week_of": "[ISO date of the Monday of the current week]",
   "result": null,
@@ -112,6 +113,7 @@ After updating individual experiments, save the week-level synthesis to `.vibelo
   "id": "refl_[YYYYMMDD of Monday]",
   "created_at": "[ISO 8601 datetime]",
   "week_of": "[ISO date of the Monday of the week]",
+  "experiment_results_summary": "[full experiment results narrative — what was run, observed, verdict, updated belief, next action for each]",
   "key_learning": "[one-sentence synthesis: what changed and why]",
   "next_steps_summary": "[carry/pivot/abandon summary for all threads]",
   "pattern_note": "[cross-week pattern, if any] | null",

@@ -28,7 +28,7 @@ Check if `.vibeloupe/experiments.json` exists in the working directory.
 2. For each goal, work conversationally: sharpen it into a falsifiable hypothesis, define the minimum test, set pass/fail criteria, get a time estimate. Use the planning methodology in the **learn-loop** skill.
 3. After all experiments are defined: surface the one upstream assumption that, if wrong, makes all of them moot.
 4. Output the weekly plan using the planning session format from the **learn-loop** skill.
-5. Save to `.vibeloupe/experiments.json`: briefly explain what the file is, then append one record per experiment using the experiment schema from the **learn-loop** skill. Read the file, parse the array, append, write back.
+5. Save to `.vibeloupe/experiments.json`: briefly explain what the file is, then append one record per experiment using the experiment schema from the **learn-loop** skill. Include the upstream assumption (⚠️) on each experiment record. Read the file, parse the array, append, write back. After saving, confirm: "Saved to your Vibeloupe log."
 
 ### 3. Reflection mode
 
@@ -39,7 +39,7 @@ Check if `.vibeloupe/experiments.json` exists in the working directory.
 5. If experiments span 3+ weeks, check for cross-week patterns and surface any you find.
 6. Output results using the reflection session format from the **learn-loop** skill.
 7. Update `.vibeloupe/experiments.json`: find each experiment by `id`, update the result fields using the reflection schema from the **learn-loop** skill. Read the file, update matching records in-place, write back.
-8. Save the week-level synthesis to `.vibeloupe/reflections.json`: read the file (create with `[]` if it doesn't exist), upsert a reflection record for the current week using the reflection record schema from the **learn-loop** skill. If a record with the same `week_of` exists, replace it. After saving, confirm: "Saved to your Vibeloupe log."
+8. Save the week-level synthesis to `.vibeloupe/reflections.json`: read the file (create with `[]` if it doesn't exist), upsert a reflection record for the current week using the reflection record schema from the **learn-loop** skill. Include the full experiment results narrative (the 🔬 section), key learning (💡), next steps summary (➡️), pattern note (📈 if any), and experiment IDs. If a record with the same `week_of` exists, replace it. After saving, confirm: "Saved to your Vibeloupe log."
 
 ## Rules
 

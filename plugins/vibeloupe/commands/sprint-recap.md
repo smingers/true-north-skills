@@ -54,4 +54,4 @@ From New Feature and Bug Fix / Improvement commits only, pick the 3–5 most fun
 
 ### 7. Save
 
-Append a record to `.vibeloupe/sprints.json` using the sprint schema from the **sprint-recap** skill. Read the file, parse the array, append, write back.
+Append a record to `.vibeloupe/sprints.json` using the sprint schema from the **sprint-recap** skill. Include all sections: summary, problem inferred, new features (if any), bug fixes (if any), experiment alignment (if any), and by-the-numbers data. Read the file, parse the array, append, write back. After saving, confirm: "Saved to your Vibeloupe log."

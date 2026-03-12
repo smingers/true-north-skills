@@ -41,4 +41,4 @@ Produce the test plan using the exact output headers from the **hypothesis-valid
 
 Ask: "Want me to save Experiment 1 to `.vibeloupe/experiments.json`? Or load the full test sequence as a multi-week plan?"
 
-If yes: briefly explain that `.vibeloupe/experiments.json` is the structured experiment record that all vibeloupe skills share — a file write request will appear. Then append one record per experiment using the experiment schema from the **hypothesis-validator** skill. Read the file, parse the array, append, write back.
+If yes: briefly explain that `.vibeloupe/experiments.json` is the structured experiment record that all vibeloupe skills share — a file write request will appear. Then append one record per experiment using the experiment schema from the **hypothesis-validator** skill. Include all fields: the hypothesis (🎯), all risky assumptions (⚠️), the recommended experiment (🧪), full test sequence (📋), and decision criteria (🚦). Read the file, parse the array, append, write back. After saving, confirm: "Saved to your Vibeloupe log."

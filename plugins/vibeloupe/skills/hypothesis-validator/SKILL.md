@@ -1,7 +1,7 @@
 ---
 name: hypothesis-validator
 description: Use when the user says "validate my hypothesis", "test my idea", "I want to build X", "should I build this", "is there a market for this", "help me with customer development", "validate this problem", "how do I test this assumption", "I think people have a problem with", "I'm thinking of starting a company that", "help me do product discovery", "I have an idea", or describes an idea or problem they want to test before building.
-version: 0.2.15
+version: 0.2.16
 ---
 
 # Hypothesis Validator
@@ -60,8 +60,11 @@ Target length: 600–1000 words. A tightly scoped hypothesis earns a shorter pla
   "created_by": "hypothesis-validator",
   "hypothesis": "[one-line falsifiable hypothesis statement]",
   "riskiest_assumption": "[the #1 riskiest assumption]",
+  "riskiest_assumptions": ["[assumption 1]", "[assumption 2]", "..."],
   "recommended_experiment": "[one sentence describing the recommended first experiment; include time estimate as prose]",
+  "full_test_sequence": "[full test sequence narrative — all experiments in order]",
   "pass_fail_criterion": "[explicit pass and fail criteria]",
+  "decision_criteria": "[full decision criteria narrative — what to do if pass/fail/ambiguous]",
   "status": "untested",
   "week_of": "[ISO date of the Monday of the current week]",
   "result": null,
